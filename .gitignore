@@ -1,0 +1,22 @@
+# Python
+*.pyc
+__pycache__/
+
+# Environment
+.env
+venv/
+env/
+
+# Credentials
+credentials/
+credentials.json
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Miscellaneous
+.DS_Store
+Thumbs.db

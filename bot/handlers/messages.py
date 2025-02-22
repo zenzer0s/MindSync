@@ -58,7 +58,7 @@ async def cmd_list_urls(message: types.Message):
     
     response = "📚 Last 5 saved URLs:\n\n"
     for i, url in enumerate(urls, 1):
-        response += f"{i}. {url['title']}\n🔗 {url['url']}\n\n"
+        response += f"{i}. {url['Title']}\n🔗 {url['URL']}\n\n"
     
     await message.reply(response, disable_web_page_preview=True)
 
