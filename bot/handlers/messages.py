@@ -1,8 +1,8 @@
 from aiogram import Router, types, F
 from aiogram.filters import Command
-from ..utils.url_utils import validate_url, extract_metadata
-from ...database.db_utils import GoogleSheetsDB
-from ..config import GOOGLE_CREDS_PATH, SPREADSHEET_NAME
+from bot.utils.url_utils import validate_url, extract_metadata
+from database.db_utils import GoogleSheetsDB
+from bot.config import GOOGLE_CREDS_PATH, SPREADSHEET_NAME
 
 router = Router()
 db = GoogleSheetsDB(GOOGLE_CREDS_PATH, SPREADSHEET_NAME)
@@ -52,6 +52,7 @@ async def cmd_add_url(message: types.Message):
 @router.message(Command("list"))
 async def cmd_list_urls(message: types.Message):
     urls = await db.get_urls(limit=5)
+    print(f"URLs retrieved: {urls}")
     if not urls:
         await message.reply("No URLs saved yet!")
         return
