@@ -40,8 +40,18 @@ async def process_add_callback(callback: types.CallbackQuery):
 
 @router.callback_query(F.data == "delete")
 async def process_delete_callback(callback: types.CallbackQuery):
-    await callback.answer("Please send the URL to delete.")
-    await callback.message.answer("Send me the URL you want to delete.")
+    await callback.answer("Fetching URLs...")
+    urls = await db.get_urls()
+    
+    if not urls:
+        await callback.message.answer("No URLs saved yet!")
+        return
+    
+    response = "🗑️ Select the number of the URL to delete:\n\n"
+    for i, url in enumerate(urls, 1):
+        response += f"{i}. {url['Title']}\n🔗 {url['URL']}\n\n"
+    
+    await callback.message.answer(response, disable_web_page_preview=True)
 
 @router.callback_query(F.data == "search")
 async def process_search_callback(callback: types.CallbackQuery):

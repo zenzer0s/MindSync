@@ -12,6 +12,7 @@ async def cmd_start(message: types.Message):
     keyboard.button(text="📄 List URLs", callback_data="list")
     keyboard.button(text="➕ Add URL", callback_data="add")
     keyboard.button(text="❌ Delete URL", callback_data="delete")
+    keyboard.adjust(3)  # Adjust to 3 columns
     
     await message.reply(
         "Welcome to MetaMind Bot! 🤖\n\n"
