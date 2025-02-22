@@ -108,7 +108,15 @@ async def cmd_search_urls(message: types.Message):
 
 @router.message()
 async def handle_message(message: types.Message):
-    await message.reply(
-        "I can help you manage URLs!\n"
-        "Use /help to see available commands."
-    )
+    text = message.text.lower()
+    if text.startswith("http"):
+        await cmd_add_url(message)
+    elif text.startswith("delete"):
+        await cmd_delete_url(message)
+    elif text.startswith("search"):
+        await cmd_search_urls(message)
+    else:
+        await message.reply(
+            "I can help you manage URLs!\n"
+            "Use /help to see available commands."
+        )
