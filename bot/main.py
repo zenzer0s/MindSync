@@ -9,6 +9,7 @@ from .handlers import commands, messages, callbacks
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Initialize bot and dispatcher
 bot = Bot(
@@ -23,8 +24,18 @@ dp.include_router(messages.router)
 dp.include_router(callbacks.router)
 
 async def main():
-    # Start bot
-    await dp.start_polling(bot)
+    try:
+        logger.info("Starting bot...")
+        await dp.start_polling(bot)
+    except Exception as e:
+        logger.error(f"Error occurred: {e}")
+    finally:
+        logger.info("Shutting down bot...")
+        await bot.session.close()
+        logger.info("Bot stopped successfully")
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        logger.info("Bot stopped by user (Ctrl+C)")
