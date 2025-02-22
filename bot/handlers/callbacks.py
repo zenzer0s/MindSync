@@ -11,7 +11,7 @@ async def process_help_callback(callback: types.CallbackQuery):
         "/help - Show this help message\n"
         "/add [url] - Add a new URL\n"
         "/list - List saved URLs\n"
-        "/search [query] - Search saved URLs"
+        "/delete [url] - Delete a URL"
     )
     await callback.message.answer(help_text)
 

@@ -25,6 +25,6 @@ async def cmd_help(message: types.Message):
         "/help - Show this help message\n"
         "/add [url] - Add a new URL\n"
         "/list - List saved URLs\n"
-        "/search [query] - Search saved URLs"
+        "/delete [url] - Delete a URL"
     )
     await message.reply(help_text)

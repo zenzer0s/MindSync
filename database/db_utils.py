@@ -48,3 +48,17 @@ class GoogleSheetsDB:
         except Exception as e:
             print(f"Error getting URLs: {e}")
             return []
+
+    async def delete_url(self, url: str) -> bool:
+        try:
+            cell = self.sheet.find(url)
+            if cell:
+                self.sheet.delete_rows(cell.row)
+                print(f"Deleted row with URL: {url}")
+                return True
+            else:
+                print(f"URL not found: {url}")
+                return False
+        except Exception as e:
+            print(f"Error deleting URL: {e}")
+            return False
